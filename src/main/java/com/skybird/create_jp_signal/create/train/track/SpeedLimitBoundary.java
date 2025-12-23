@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class SpeedLimitBoundary extends SingleBlockEntityEdgePoint {
 
-    private double speedLimit = 100.0; // km/h
+    private double speedLimit = 200.0; // km/h
     private double limitDistance = 0.0; // blocks
 
 

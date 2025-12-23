@@ -8,6 +8,7 @@
     "block.create_jp_signal.signal_mast": "Signal Mast",
     "block.create_jp_signal.control_box": "Signal Controller",
     "block.create_jp_signal.signal_repeater": "Signal Repeater",
+    "block.create_jp_signal.speed_limit": "Speed Limiter",
     "item.create_jp_signal.signal_configurator": "Signal Configurator",
     "item.create_jp_signal.signal_mast_with_signal": "Signal With Signal Mast",
     "itemGroup.create_jp_signal" : "Create Japanese Signals",

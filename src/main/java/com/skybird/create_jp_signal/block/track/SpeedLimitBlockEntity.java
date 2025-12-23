@@ -8,7 +8,6 @@ import com.simibubi.create.content.trains.track.TrackTargetingBehaviour;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.skybird.create_jp_signal.AllBlockEntities;
-import com.skybird.create_jp_signal.JpSignals;
 import com.skybird.create_jp_signal.create.train.track.AllEdgePointTypes;
 import com.skybird.create_jp_signal.create.train.track.SpeedLimitBoundary;
 import com.skybird.create_jp_signal.menu.SpeedLimitMenu;
@@ -20,7 +19,6 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
@@ -30,7 +28,7 @@ public class SpeedLimitBlockEntity extends SmartBlockEntity implements MenuProvi
 
     private boolean shouldRenderOverlay = false;
 
-    private double speedLimit = 100.0;
+    private double speedLimit = 200.0;
     private double limitDistance = 0.0;
 
     public SpeedLimitBlockEntity(BlockPos pos, BlockState state) {
@@ -47,17 +45,13 @@ public class SpeedLimitBlockEntity extends SmartBlockEntity implements MenuProvi
         boolean newRenderState;
 
         if (boundary != null) {
-            // JpSignals.LOGGER.info("BlockEntity tick read boundary:" + Double.toString(boundary.getSpeedLimit()) + " " + Double.toString(boundary.getLimitDistance()));
             newRenderState = boundary.isBoundTo(worldPosition);
-            // JpSignals.LOGGER.info("boundary exists");
             if (boundary.getSpeedLimit() != speedLimit || boundary.getLimitDistance() != limitDistance) {
                 boundary.setSpeedLimit(speedLimit);
                 boundary.setLimitDistance(limitDistance);
             }
         } else {
             newRenderState = false;
-            // JpSignals.LOGGER.info("boundary == null");
-
         }
 
         if (shouldRenderOverlay != newRenderState) {
@@ -104,8 +98,8 @@ public class SpeedLimitBlockEntity extends SmartBlockEntity implements MenuProvi
         if (!clientPacket && edgePoint != null) {
             SpeedLimitBoundary boundary = edgePoint.getEdgePoint();
             if (boundary != null) {
-                 boundary.setSpeedLimit(speedLimit);
-                 boundary.setLimitDistance(limitDistance);
+                boundary.setSpeedLimit(speedLimit);
+                boundary.setLimitDistance(limitDistance);
             }
         }
     }

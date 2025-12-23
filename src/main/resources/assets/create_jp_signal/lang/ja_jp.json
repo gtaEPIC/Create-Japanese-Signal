@@ -8,6 +8,7 @@
     "block.create_jp_signal.signal_mast": "信号柱",
     "block.create_jp_signal.control_box": "信号制御機",
     "block.create_jp_signal.signal_repeater": "信号リピーター",
+    "block.create_jp_signal.speed_limit": "速度制限指示",
     "item.create_jp_signal.signal_configurator": "信号設定機",
     "item.create_jp_signal.signal_mast_with_signal": "信号機付き信号柱",
     "itemGroup.create_jp_signal" : "Create Japanese Signals",

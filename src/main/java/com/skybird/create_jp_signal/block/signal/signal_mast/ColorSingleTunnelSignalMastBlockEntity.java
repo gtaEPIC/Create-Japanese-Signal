@@ -57,7 +57,7 @@ public class ColorSingleTunnelSignalMastBlockEntity extends BaseSignalMastBlockE
             case -1 ->  -1.0 / 16.0;
             case 0  ->   0.0 / 16.0;
             case 1  ->   1.0 / 16.0;
-            case 2  ->   2.0 / 16.0;
+            case 2  ->   3.0 / 16.0;
             default ->   0.0;
         };
         double y = switch (vStep) {

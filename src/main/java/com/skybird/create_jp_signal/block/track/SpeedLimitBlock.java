@@ -1,10 +1,14 @@
 package com.skybird.create_jp_signal.block.track;
 
+import java.util.Collections;
+import java.util.List;
+
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.trains.signal.SignalBlockEntity;
 import com.simibubi.create.content.trains.track.TrackTargetingBehaviour;
 import com.simibubi.create.foundation.block.IBE;
 import com.skybird.create_jp_signal.AllBlockEntities;
+import com.skybird.create_jp_signal.AllBlocks;
 import com.skybird.create_jp_signal.create.train.track.SpeedLimitBoundary;
 
 import net.minecraft.core.BlockPos;
@@ -13,6 +17,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -56,6 +62,11 @@ public class SpeedLimitBlock extends Block implements IBE<SpeedLimitBlockEntity>
     @Override
     public BlockEntityType<? extends SpeedLimitBlockEntity> getBlockEntityType() {
         return AllBlockEntities.SPEED_LIMIT_ENTITY.get();
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pBuilder) {
+        return Collections.singletonList(new ItemStack(AllBlocks.SPEED_LIMIT_ITEM.get()));
     }
 
     @Override
