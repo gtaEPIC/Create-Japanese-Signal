@@ -9,5 +9,4 @@ public class SpeedLimitBlockItem extends TrackTargetingBlockItem {
     public SpeedLimitBlockItem(Block block, Properties properties) {
         super(block, properties, AllEdgePointTypes.SPEED_LIMIT);
     }
-    
 }

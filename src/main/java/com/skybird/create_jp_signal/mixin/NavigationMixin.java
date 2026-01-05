@@ -64,7 +64,7 @@ public abstract class NavigationMixin implements INavigation {
 
     @ModifyConstant(method = "tick", constant = @Constant(doubleValue = 4.5))
     private double create_jp_signal_changePreDepartureLookAhead(double originalValue) {
-        return 20.0;
+        return 64.0;
     }
 
     @Inject(
