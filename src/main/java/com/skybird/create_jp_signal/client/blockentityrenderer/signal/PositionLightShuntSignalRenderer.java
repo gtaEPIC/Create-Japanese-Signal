@@ -3,8 +3,6 @@ package com.skybird.create_jp_signal.client.blockentityrenderer.signal;
 import java.util.Iterator;
 import java.util.List;
 
-import org.stringtemplate.v4.compiler.CodeGenerator.primary_return;
-
 import com.jozufozu.flywheel.backend.Backend;
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;

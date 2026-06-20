@@ -4,8 +4,6 @@ import com.skybird.create_jp_signal.AllBlockEntities;
 import com.skybird.create_jp_signal.block.signal.signal_type.AllSignalTypes;
 import com.skybird.create_jp_signal.block.signal.signal_type.ISignalType;
 
-import io.netty.util.Signal;
-
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;

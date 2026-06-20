@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -76,22 +76,27 @@ public abstract class NavigationMixin implements INavigation {
     }
 
     //scanDistance
-    @Redirect(
+    // Must be @ModifyArg (NOT @Redirect, NOT @ModifyArgs):
+    //  - @Redirect deletes the Mth.clamp INVOKE, removing the anchor for Steam'n'Rails' MixinNavigation
+    //    @ModifyVariable (Navigation::resetSufficientBufferDistance) on this same clamp -> crash.
+    //  - @ModifyArgs works in dev but generates a synthetic org.spongepowered.asm.synthetic.args.Args$N
+    //    class that fails to load in production ModLauncher -> NoClassDefFoundError in Train.<init> ->
+    //    assembly silently aborts ("no bogeys" / train vanishes).
+    // @ModifyArg(index=0) only transforms arg 0 (no Args bundle, no synthetic class) and leaves the
+    // clamp INVOKE intact, so it composes with Railways AND loads in production. See CLAUDE.md.
+    // arg 0 = brakingDistanceNoFlicker (value); args 1/2 = preDepartureLookAhead / distanceToDestination
+    @ModifyArg(
         method = "tick",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/util/Mth;clamp(DDD)D", // Lnet/minecraft/util/Mth;clamp(DDD)D = Lnet/minecraft/util/Mth;m_14008_(DDD)D
             ordinal = 0,
             remap = true
-        )
+        ),
+        index = 0
     )
-    private double create_jp_signal_redirectScanDistanceCalculation(double value, double min, double max) {
-        // value = brakingDistanceNoFlicker
-        // min   = preDepartureLookAhead
-        // max   = this.distanceToDestination
-        // return Mth.clamp(value + Math.abs(this.train.speed) * 20 * 5 + 30, min, max);
-        double reservationDistance = Math.max(value, ((ITrain)train).getMinimumReservationDistance());
-        return Mth.clamp(reservationDistance, min, max);
+    private double create_jp_signal_modifyScanDistanceCalculation(double value) {
+        return Math.max(value, ((ITrain)train).getMinimumReservationDistance());
     }
 
     @ModifyVariable(

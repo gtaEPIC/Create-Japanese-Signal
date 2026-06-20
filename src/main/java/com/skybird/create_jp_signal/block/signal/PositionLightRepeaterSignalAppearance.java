@@ -2,8 +2,6 @@ package com.skybird.create_jp_signal.block.signal;
 
 import java.util.List;
 
-import org.jline.terminal.Terminal.Signal;
-
 import net.minecraft.nbt.CompoundTag;
 
 public class PositionLightRepeaterSignalAppearance implements ISignalAppearance {
